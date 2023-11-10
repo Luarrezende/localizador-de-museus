@@ -11,21 +11,20 @@ import org.springframework.stereotype.Service;
  * Exception to invalid coordinate.
  */
 @Service
-public abstract class MuseumService implements MuseumServiceInterface {
+public class MuseumService implements MuseumServiceInterface {
   MuseumFakeDatabase museumFakeDatabase;
 
   public MuseumService(MuseumFakeDatabase museumFakeDatabase) {
     this.museumFakeDatabase = museumFakeDatabase;
   }
 
+  private Boolean checkCoordinate(Coordinate coordinate) {
+    return CoordinateUtil.isCoordinateValid(coordinate);
+  }
+
   @Override
   public Museum createMuseum(Museum museum) {
-    double latitude = museum.getCoordinate().latitude();
-    double longitude = museum.getCoordinate().longitude();
-
-    Coordinate coordinate = new Coordinate(latitude, longitude);
-
-    if (!CoordinateUtil.isCoordinateValid(coordinate)) {
+    if (!checkCoordinate(museum.getCoordinate())) {
       throw new InvalidCoordinateException();
     }
 
