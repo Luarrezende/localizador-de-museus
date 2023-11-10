@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Exception to invalid coordinate.
  */
 @Service
-public class MuseumService implements MuseumServiceInterface {
+public abstract class MuseumService implements MuseumServiceInterface {
   MuseumFakeDatabase museumFakeDatabase;
 
   public MuseumService(MuseumFakeDatabase museumFakeDatabase) {
